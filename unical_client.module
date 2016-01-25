@@ -4,24 +4,24 @@ function _help($path, $arg)
 {
   switch ($path)
   {
-    case "admin/help#unical_embed":
+    case "admin/help#unical_client":
     return '<p>' . t("UniCal embed help page") . '</p>';
     break;
   }
 }
 
-function unical_embed_init()
+function unical_client_init()
 {
   //Get API URL setting
-  $siteUrl = variable_get('unical_embed_settings_site_url');
-  $siteId = variable_get('unical_embed_settings_site_id');
+  $siteUrl = variable_get('unical_client_settings_site_url');
+  $siteId = variable_get('unical_client_settings_site_id');
 
   //JS Variables
   $settings = array(
     'siteUrl' => $siteUrl,
     'siteId' => $siteId
   );
-  drupal_add_js(array('unical_embed_variables' => $settings), 'setting');
+  drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
   //Idfive Calendar API JS
   drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
@@ -33,22 +33,22 @@ function unical_embed_init()
   drupal_add_css($siteUrl . 'sites/all/modules/unical/assets/css/styles.css', 'external');
 }
 
-function unical_embed_menu()
+function unical_client_menu()
 {
   $items = array();
 
   $items['calendar'] = array(
     'title' => 'Calendar',
-    'page callback' => 'unical_embed_get',
+    'page callback' => 'unical_client_get',
     'access arguments' => array('access content'),
     'type' => MENU_NORMAL_ITEM,
   );
 
-  $items['admin/config/services/unical_embed'] = array(
+  $items['admin/config/services/unical_client'] = array(
     'title' => 'UniCal embed settings',
     'description' => 'Configuration for UniCal embed',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('unical_embed_form'),
+    'page arguments' => array('unical_client_form'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM
   );
@@ -56,7 +56,7 @@ function unical_embed_menu()
   return $items;
 }
 
-function unical_embed_form($form, &$form_state)
+function unical_client_form($form, &$form_state)
 {
   $form['some_text'] = array(
     '#markup' => '
@@ -70,16 +70,16 @@ function unical_embed_form($form, &$form_state)
   );
 
   //General settings
-  $form['unical_embed_settings'] = array(
+  $form['unical_client_settings'] = array(
     '#type' => 'fieldset',
     '#title' => 'Settings'
   );
 
   //URL of the API
-  $form['unical_embed_settings']['unical_embed_settings_site_url'] = array(
+  $form['unical_client_settings']['unical_client_settings_site_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Site URL'),
-    '#default_value' => variable_get('unical_embed_settings_site_url', ''),
+    '#default_value' => variable_get('unical_client_settings_site_url', ''),
     '#size' => 100,
     '#maxlength' => 255,
     '#description' => t('URL of main UniCal calendar website'),
@@ -87,10 +87,10 @@ function unical_embed_form($form, &$form_state)
   );
 
   //Site ID
-  $form['unical_embed_settings']['unical_embed_settings_site_id'] = array(
+  $form['unical_client_settings']['unical_client_settings_site_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Site ID'),
-    '#default_value' => variable_get('unical_embed_settings_site_id', ''),
+    '#default_value' => variable_get('unical_client_settings_site_id', ''),
     '#size' => 5,
     '#maxlength' => 10,
     '#description' => t('ID of the site node'),
@@ -100,17 +100,17 @@ function unical_embed_form($form, &$form_state)
   return system_settings_form($form);
 }
 
-function unical_embed_theme()
+function unical_client_theme()
 {
   return array(
-    'unical_embed_calendar' => array(
+    'unical_client_calendar' => array(
       'template' => 'calendar',
     ),
   );
 }
 
-function unical_embed_get($page = 0)
+function unical_client_get($page = 0)
 {
   //Load the template
-  return theme('unical_embed_calendar');
+  return theme('unical_client_calendar');
 }
