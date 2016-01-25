@@ -25,12 +25,12 @@ function unical_embed_init()
 
   //Idfive Calendar API JS
   drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
-  drupal_add_js($siteUrl . 'sites/all/modules/idfive_calendar_api/app/build/idfivecalendarapi.js', 'file', 'footer');
+  drupal_add_js($siteUrl . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
 
   //CSS includes
   drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
-  drupal_add_css($siteUrl . 'sites/all/modules/idfive_calendar_api/assets/css/styles.css', 'external');
+  drupal_add_css($siteUrl . 'sites/all/modules/unical/assets/css/styles.css', 'external');
 }
 
 function unical_embed_menu()
