@@ -1,4 +1,4 @@
-<div ng-app="calendar" class="idfive-calendar">
+<div ng-app="calendar" class="unical-calendar">
   <div ng-view></div>
 </div>
 <script>
