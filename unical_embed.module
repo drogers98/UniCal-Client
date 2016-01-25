@@ -21,7 +21,7 @@ function unical_embed_init()
     'siteUrl' => $siteUrl,
     'siteId' => $siteId
   );
-  drupal_add_js(array('idfiveCalendarEmbed' => $settings), 'setting');
+  drupal_add_js(array('unical_embed_variables' => $settings), 'setting');
 
   //Idfive Calendar API JS
   drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
