@@ -4,8 +4,8 @@ function _help($path, $arg)
 {
   switch ($path)
   {
-    case "admin/help#idfive_calendar_embed":
-    return '<p>' . t("Idfive calendar embed help page") . '</p>';
+    case "admin/help#unical_embed":
+    return '<p>' . t("UniCal embed help page") . '</p>';
     break;
   }
 }
@@ -13,8 +13,8 @@ function _help($path, $arg)
 function unical_embed_init()
 {
   //Get API URL setting
-  $siteUrl = variable_get('idfive_calendar_embed_settings_site_url');
-  $siteId = variable_get('idfive_calendar_embed_settings_site_id');
+  $siteUrl = variable_get('unical_embed_settings_site_url');
+  $siteId = variable_get('unical_embed_settings_site_id');
 
   //JS Variables
   $settings = array(
@@ -45,10 +45,10 @@ function unical_embed_menu()
   );
 
   $items['admin/config/services/unical_embed'] = array(
-    'title' => 'Idfive calendar embed',
+    'title' => 'UniCal embed settings',
     'description' => 'Configuration for UniCal embed',
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('idfive_calendar_embed_form'),
+    'page arguments' => array('unical_embed_form'),
     'access arguments' => array('access administration pages'),
     'type' => MENU_NORMAL_ITEM
   );
@@ -109,7 +109,7 @@ function unical_embed_theme()
   );
 }
 
-function idfive_calendar_embed_get($page = 0)
+function unical_embed_get($page = 0)
 {
   //Load the template
   return theme('unical_embed_calendar');
