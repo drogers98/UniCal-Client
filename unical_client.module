@@ -1,40 +1,54 @@
 <?php
 
-function _help($path, $arg)
-{
-  switch ($path)
-  {
+/**
+ * @file
+ * Implements various hooks and functions to run the unical_client module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function unical_client_help($path, $arg) {
+
+  switch ($path) {
     case "admin/help#unical_client":
-    return '<p>' . t("UniCal embed help page") . '</p>';
+      return '<p>' . t("UniCal embed help page") . '</p>';
+
     break;
   }
 }
 
-function unical_client_init()
-{
-  //Get API URL setting
-  $siteUrl = variable_get('unical_client_settings_site_url');
-  $siteId = variable_get('unical_client_settings_site_id');
+/**
+ * Implements hook_init().
+ */
+function unical_client_init() {
 
-  //JS Variables
+  // Get API URL setting.
+  $site_url = variable_get('unical_client_settings_site_url');
+  $site_id = variable_get('unical_client_settings_site_id');
+
+  // JS Variables.
   $settings = array(
-    'siteUrl' => $siteUrl,
-    'siteId' => $siteId
+    'site_url' => $site_url,
+    'site_id' => $site_id,
   );
   drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
-  //Idfive Calendar API JS
+  // Idfive Calendar API JS.
   drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
-  drupal_add_js($siteUrl . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
+  drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
 
-  //CSS includes
+  // CSS includes.
   drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
-  drupal_add_css($siteUrl . 'sites/all/modules/unical/assets/css/styles.css', 'external');
+  drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
 }
 
-function unical_client_menu()
-{
+/**
+ * Implements hook_menu().
+ */
+function unical_client_menu() {
+
   $items = array();
 
   $items['calendar'] = array(
@@ -50,14 +64,17 @@ function unical_client_menu()
     'page callback' => 'drupal_get_form',
     'page arguments' => array('unical_client_form'),
     'access arguments' => array('access administration pages'),
-    'type' => MENU_NORMAL_ITEM
+    'type' => MENU_NORMAL_ITEM,
   );
 
   return $items;
 }
 
-function unical_client_form($form, &$form_state)
-{
+/**
+ * Implements hook_form().
+ */
+function unical_client_form($form, &$form_state) {
+
   $form['some_text'] = array(
     '#markup' => '
     <p>This page allows you to define the settings that will control your rendering of the <a href="http://idfive.com">UniCal</a> custom Calendar. Your site administrator should provide you with the site URL of the mothership site, and your particular Site ID, which will do the work of pulling your custom configurations.</p>
@@ -66,16 +83,16 @@ function unical_client_form($form, &$form_state)
     <li><a href="/admin/config/search/path/add">Add a local path alias</a> to change the default <a href="/calendar">/calendar</a> link, if you choose.</li>
     </ul>
     <p>Contact your site administrator (who gave you the Site ID) If further customizations are required.</p>
-    '
+    ',
   );
 
-  //General settings
+  // General settings.
   $form['unical_client_settings'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Settings'
+    '#title' => 'Settings',
   );
 
-  //URL of the API
+  // URL of the API.
   $form['unical_client_settings']['unical_client_settings_site_url'] = array(
     '#type' => 'textfield',
     '#title' => t('Site URL'),
@@ -83,10 +100,10 @@ function unical_client_form($form, &$form_state)
     '#size' => 100,
     '#maxlength' => 255,
     '#description' => t('URL of main UniCal calendar website'),
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
-  //Site ID
+  // Site ID.
   $form['unical_client_settings']['unical_client_settings_site_id'] = array(
     '#type' => 'textfield',
     '#title' => t('Site ID'),
@@ -94,14 +111,17 @@ function unical_client_form($form, &$form_state)
     '#size' => 5,
     '#maxlength' => 10,
     '#description' => t('ID of the site node'),
-    '#required' => TRUE
+    '#required' => TRUE,
   );
 
   return system_settings_form($form);
 }
 
-function unical_client_theme()
-{
+/**
+ * Function for above hook_menu().
+ */
+function unical_client_theme() {
+
   return array(
     'unical_client_calendar' => array(
       'template' => 'calendar',
@@ -109,8 +129,11 @@ function unical_client_theme()
   );
 }
 
-function unical_client_get($page = 0)
-{
-  //Load the template
+/**
+ * Function for above hook_menu().
+ */
+function unical_client_get($page = 0) {
+
+  // Load the template.
   return theme('unical_client_calendar');
 }
