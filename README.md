@@ -1,8 +1,8 @@
 INTRODUCTION
 ------------
 
-This module is solely for displaying calendar sites created in UniCal. You may
-install this module on any drupal site you wish, and reference a SITE from the
+This module is solely for displaying calendar Sites created in UniCal. You may
+install this module on any Drupal site you wish, and reference a SITE from the
 MASTER install.
 
 REQUIREMENTS
