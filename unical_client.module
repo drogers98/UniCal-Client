@@ -8,15 +8,41 @@
 /**
  * Implements hook_help().
  */
-function unical_client_help($path, $arg) {
-
+ function unical_client_help($path, $arg) {
   switch ($path) {
-    case "admin/help#unical_client":
-      return '<p>' . t("UniCal embed help page") . '</p>';
+    case 'admin/help#unical_client':
 
-    break;
+      $filepath = dirname(__FILE__) . '/README.md';
+      if (file_exists($filepath)) {
+        $readme = file_get_contents($filepath);
+      }
+      else {
+        $filepath = dirname(__FILE__) . '/README.txt';
+        if (file_exists($filepath)) {
+          $readme = file_get_contents($filepath);
+        }
+      }
+      if (!isset($readme)) {
+        return NULL;
+      }
+      if (module_exists('markdown')) {
+        $filters = module_invoke('markdown', 'filter_info');
+        $info = $filters['filter_markdown'];
+
+        if (function_exists($info['process callback'])) {
+          $output = $info['process callback']($readme, NULL);
+        }
+        else {
+          $output = '<pre>' . $readme . '</pre>';
+        }
+      }
+      else {
+        $output = '<pre>' . $readme . '</pre>';
+      }
+
+      return $output;
   }
-}
+ }
 
 /**
  * Implements hook_init().
@@ -34,13 +60,17 @@ function unical_client_init() {
   );
   drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
-  // Idfive Calendar API JS.
+  // AddThis widget JS.
   drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
+
+  // Unical API JS.
   drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
 
-  // CSS includes.
+  // Fonts.
   drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
+
+  // CSS.
   drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
 }
 
