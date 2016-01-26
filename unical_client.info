@@ -1,7 +1,6 @@
 name = UniCal Client
-description = Allows events to be embedded from UniCal module, and API
+description = Allows calendars/events (sites) to be embedded from UniCal module, via REST
 core = 7.x
-version = "7.x-0.1.3"
 configure = admin/config/services/unical_client
 package = UniCal
 dependencies[] = unical
