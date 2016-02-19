@@ -67,7 +67,7 @@ function unical_client_init() {
   drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
 
   // Fonts.
-  drupal_add_css('http://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
+  drupal_add_css('https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
 
   // CSS.
