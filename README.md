@@ -18,6 +18,7 @@ INSTALLATION
 * Install as you would normally install a contributed Drupal module. See:
   https://drupal.org/documentation/install/modules-themes/modules-7
   for further information.
+* Modify .htaccess file, as shown in configuration.
 
 CONFIGURATION
 -------------
@@ -28,6 +29,22 @@ CONFIGURATION
     install, viewable to admins on the node page of that site.
   - Site URL: This is the URL of the MASTER install, so we know where to point
     the REST endpoint. Also available on the node page of the Site.
+
+### .htaccess modifications: ###
+
+Some modifications are neccesary to both re-route social bots the actual node
+page (php) of the main site, in order to scrape, and to allow use of non # urls.
+The following rules assume that your events are in the format /event/NID/TITLE,
+and be sure to modify YOUR_MAIN_INSTALL_URL with actual url of your main site, so
+that facebook bots/are redirected to the stock drupal node of the event.
+
+  # Allow social media crawlers to work by redirecting them to a server-rendered static version on the page
+  RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+  RewriteRule event/(.*)/(.*) YOUR_MAIN_INSTALL_URL/node/$1 [P]
+
+  # Workaround to be able to use non # url in the calendar
+  RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
+  RewriteRule event/(.*)/(.*) http://%{HTTP_HOST}/#%1/event/$1/$2 [NE,L]
 
 
 TROUBLESHOOTING
