@@ -60,9 +60,6 @@ function unical_client_init() {
   );
   drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
-  // AddThis widget JS.
-  drupal_add_js('//s7.addthis.com/js/300/addthis_widget.js', 'external', 'footer');
-
   // Unical API JS.
   drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', 'file', 'footer');
 
