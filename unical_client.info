@@ -3,4 +3,3 @@ description = Allows calendars/events (sites) to be embedded from UniCal module,
 core = 7.x
 configure = admin/config/services/unical_client
 package = UniCal
-dependencies[] = unical

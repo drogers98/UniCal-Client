@@ -164,3 +164,23 @@ function unical_client_get($page = 0) {
   // Load the template.
   return theme('unical_client_calendar');
 }
+
+/**
+ * Preprocesses the wrapping HTML.
+ *
+ * Add base tag to allow ng app tu use html5mode urls. (no #)
+ */
+ function unical_client_preprocess_html(&$vars) {
+   // Only on non admin paths
+   if (!path_is_admin(current_path())) {
+     $meta_fragment = array(
+       '#type' => 'html_tag',
+       '#tag' => 'base',
+       '#attributes' => array(
+         'href' => '/'
+       )
+     );
+     // Add header meta tag for IE to head
+     drupal_add_html_head($meta_fragment, 'meta_fragment');
+   }
+ }
