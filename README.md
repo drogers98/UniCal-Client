@@ -55,3 +55,5 @@ TROUBLESHOOTING
 
 If you are running into errors, be sure to check that CORS is running on the
 MASTER install, and that you can ping your endpoints.
+
+Be sure that the <base href="/"> is showing in the <head>.
