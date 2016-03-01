@@ -42,6 +42,9 @@ that facebook bots/are redirected to the stock drupal node of the event.
   RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
   RewriteRule event/(.*)/(.*) YOUR_MAIN_INSTALL_URL/node/$1 [P]
 
+  **It is possible that you may need to change the proxy [P] to [NE, L] in some
+  acquia prod environments**
+
   # Workaround to be able to use non # url in the calendar
   RewriteCond %{HTTP_USER_AGENT} !(facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
   RewriteRule event/(.*)/(.*) http://%{HTTP_HOST}/#%1/event/$1/$2 [NE,L]
