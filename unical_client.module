@@ -171,13 +171,29 @@ function unical_client_get($page = 0) {
  * Add base tag to allow ng app tu use html5mode urls. (no #)
  */
  function unical_client_preprocess_html(&$vars) {
+   
    // Only on non admin paths
    if (!path_is_admin(current_path())) {
+     
+     if(drupal_is_front_page()) {
+       $baseUrl = '/';
+     } else {
+       $baseUrl = '/' . drupal_get_path_alias(current_path()) . '/';
+       
+       //Replacement patterns
+       $patterns = array();
+       $patterns[0] = '/event\/([0-9]+)\/([a-z0-9-]+)*\/?/';
+       $patterns[1] = '/submit-event\/?/';
+
+       //Regular expression to remove any event URL params
+       $baseUrl = preg_replace($patterns, '', $baseUrl);
+     }
+     
      $meta_fragment = array(
        '#type' => 'html_tag',
        '#tag' => 'base',
        '#attributes' => array(
-         'href' => '/'
+         'href' => $baseUrl
        )
      );
      // Add header meta tag for IE to head
