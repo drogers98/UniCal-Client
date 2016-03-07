@@ -52,11 +52,13 @@ function unical_client_init() {
   // Get API URL setting.
   $site_url = variable_get('unical_client_settings_site_url');
   $site_id = variable_get('unical_client_settings_site_id');
+  $addthis_id = variable_get('unical_client_settings_addevent_id');
 
   // JS Variables.
   $settings = array(
     'site_url' => $site_url,
     'site_id' => $site_id,
+    'addevent_id' => $addthis_id,
   );
   drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
@@ -138,6 +140,17 @@ function unical_client_form($form, &$form_state) {
     '#size' => 5,
     '#maxlength' => 10,
     '#description' => t('ID of the site node'),
+    '#required' => TRUE,
+  );
+
+  // addevent.com ID
+  $form['unical_client_settings']['unical_client_settings_addevent_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('addevent.com ID'),
+    '#default_value' => variable_get('unical_client_settings_addevent_id', ''),
+    '#size' => 50,
+    '#maxlength' => 100,
+    '#description' => t('ID for paid addevent.com plans'),
     '#required' => TRUE,
   );
 
