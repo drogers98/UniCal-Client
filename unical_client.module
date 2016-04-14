@@ -189,8 +189,9 @@ function unical_client_get($page = 0) {
    if (!path_is_admin(current_path())) {
 
      if(drupal_is_front_page()) {
-       $baseUrl = '/';
+       $baseUrl = base_path();
      } else {
+
        $baseUrl = '/' . drupal_get_path_alias(current_path()) . '/';
 
        //Replacement patterns
