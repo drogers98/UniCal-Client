@@ -92,7 +92,7 @@ function unical_client_menu() {
     'description' => 'Configuration for UniCal embed',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('unical_client_form'),
-    'access arguments' => array('access administration pages'),
+    'access arguments' => array('administer blocks'),
     'type' => MENU_NORMAL_ITEM,
   );
 
