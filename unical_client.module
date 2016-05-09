@@ -191,9 +191,8 @@ function unical_client_get($page = 0) {
      if(drupal_is_front_page()) {
        $baseUrl = base_path();
      } else {
-
-       $baseUrl = '/' . drupal_get_path_alias(current_path()) . '/';
-
+       $baseUrl = base_path() . drupal_get_path_alias(current_path()) . '/';
+       
        //Replacement patterns
        $patterns = array();
        $patterns[0] = '/event\/([0-9]+)\/([a-z0-9-]+)*\/?/';
