@@ -70,9 +70,15 @@ function unical_client_init() {
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
 
   // CSS.
-  drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
-  // Add boolean for this in the future (??).
-  drupal_add_css($site_url . 'sites/all/modules/unical_styles/styles.css', 'external');
+  // Add stock UniCal Styles if boolean is checked.
+  if(variable_get('unical_client_settings_use_stock')) {
+    drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
+  }
+  // Add custom UniCal Styles if boolean is checked.
+  if(variable_get('unical_client_settings_use_custom')) {
+    drupal_add_css($site_url . 'sites/all/modules/unical_styles/styles.css', 'external');
+  }
+
 }
 
 /**
@@ -154,6 +160,28 @@ function unical_client_form($form, &$form_state) {
     '#maxlength' => 100,
     '#description' => t('ID for paid addevent.com plans'),
     '#required' => TRUE,
+  );
+
+  // Style settings.
+  $form['unical_client_style_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Styles',
+  );
+
+  // Add checkbox for using stock UniCal styles
+  $form['unical_client_styles_settings']['unical_client_settings_use_stock'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use Stock CSS'),
+    '#default_value' => variable_get('unical_client_settings_use_stock', ''),
+    '#description' => t('Use the stock UniCal calendar style. Leave this checked unless you know what you are doing.'),
+  );
+
+  // Add checkbox for using custom UniCal styles
+  $form['unical_client_styles_settings']['unical_client_settings_use_custom'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Use Custom CSS'),
+    '#default_value' => variable_get('unical_client_settings_use_custom', ''),
+    '#description' => t('Use a custom UniCal calendar style, served from SITE ID/sites/all/modules/unical_styles/styles.css'),
   );
 
   return system_settings_form($form);

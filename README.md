@@ -32,6 +32,12 @@ CONFIGURATION
     install, viewable to admins on the node page of that site.
   - Site URL: This is the URL of the MASTER install, so we know where to point
     the REST endpoint. Also available on the node page of the Site.
+  - addevent.com ID: This is a field to enter an addevent.com paid plan key.
+  - Use Stock CSS: This boolean controls whether you wish to use the stock unical
+    css on the MASTER install (Site ID/sites/all/modules/unical/assets/css/styles.css).
+    Best to leave this checked unless there is a specific reason not too.
+  - Use Custom CSS: This boolean controls whether you wish to reference a custom
+    stylesheet from the unical_styles module on the MASTER install.
 
 ### .htaccess modifications: ###
 
