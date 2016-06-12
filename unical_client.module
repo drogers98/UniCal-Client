@@ -71,6 +71,8 @@ function unical_client_init() {
 
   // CSS.
   drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
+  // Add boolean for this in the future (??).
+  drupal_add_css($site_url . 'sites/all/modules/unical_styles/styles.css', 'external');
 }
 
 /**
@@ -106,7 +108,7 @@ function unical_client_form($form, &$form_state) {
 
   $form['some_text'] = array(
     '#markup' => '
-    <p>This page allows you to define the settings that will control your rendering of the <a href="http://idfive.com">UniCal</a> custom Calendar. Your site administrator should provide you with the site URL of the mothership site, and your particular Site ID, which will do the work of pulling your custom configurations.</p>
+    <p>This page allows you to define the settings that will control your rendering of the <a href="http://unical.idfive.com">UniCal</a> custom Calendar. Your site administrator should provide you with the site URL of the mothership site, and your particular Site ID, which will do the work of pulling your custom configurations.</p>
     <ul>
     <li>Your calendar will now be viewable at <a href="/calendar">/calendar</a>.</li>
     <li><a href="/admin/config/search/path/add">Add a local path alias</a> to change the default <a href="/calendar">/calendar</a> link, if you choose.</li>
@@ -192,7 +194,7 @@ function unical_client_get($page = 0) {
        $baseUrl = base_path();
      } else {
        $baseUrl = base_path() . drupal_get_path_alias(current_path()) . '/';
-       
+
        //Replacement patterns
        $patterns = array();
        $patterns[0] = '/event\/([0-9]+)\/([a-z0-9-]+)*\/?/';

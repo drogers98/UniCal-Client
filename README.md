@@ -10,7 +10,7 @@ REQUIREMENTS
 
 This module requires the following modules:
 
-* UniCal (https://www.drupal.org/sandbox/rogerseyebyte/2648414)
+* UniCal (https://github.com/idfive/UniCal)
 
 This install can, however, be on a separate installation, but you will need to have
 access to the site ID's/etc from there, or have them provided by an administrator.
