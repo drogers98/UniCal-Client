@@ -37,13 +37,11 @@ CONFIGURATION
 
 Some modifications are neccesary to both re-route social bots the actual node
 page (php) of the main site, in order to scrape, and to allow use of non # urls.
-The following rules assume that your events are in the format /event/NID/TITLE,
-and be sure to modify YOUR_MAIN_INSTALL_URL with actual url of your main site, so
-that facebook bots/are redirected to the stock drupal node of the event.
+The following rules assume that your events are in the format /event/NID/TITLE.
 
   # Allow social media crawlers to work by redirecting them to a server-rendered static version on the page
   RewriteCond %{HTTP_USER_AGENT} (facebookexternalhit/[0-9]|Twitterbot|Pinterest|Google.*snippet)
-  RewriteRule event/(.*)/(.*) YOUR_MAIN_INSTALL_URL/node/$1 [P]
+  RewriteRule event/(.*)/(.*) http://%{HTTP_HOST}/node/$1 [P]
 
   **It is possible that you may need to change the proxy [P] to [NE, L] in some
   acquia prod environments**
@@ -60,4 +58,4 @@ TROUBLESHOOTING
 If you are running into errors, be sure to check that CORS is running on the
 MASTER install, and that you can ping your endpoints.
 
-Be sure that the <base href="/"> is showing in the <head>.
+Be sure that the html5 mode base href="/" is showing in the head.
