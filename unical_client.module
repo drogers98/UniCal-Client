@@ -179,7 +179,7 @@ function unical_client_form($form, &$form_state) {
   $form['unical_client_style_settings']['unical_client_settings_use_custom'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use Custom CSS'),
-    '#default_value' => variable_get('unical_client_settings_use_custom', ''),
+    '#default_value' => variable_get('unical_client_settings_use_custom', 1),
     '#description' => t('Use a custom UniCal calendar style, served from SITE ID/sites/all/modules/unical_styles/style.css'),
   );
 
