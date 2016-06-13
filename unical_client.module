@@ -76,7 +76,7 @@ function unical_client_init() {
   }
   // Add custom UniCal Styles if boolean is checked.
   if(variable_get('unical_client_settings_use_custom')) {
-    drupal_add_css($site_url . 'sites/all/modules/unical_styles/styles.css', 'external');
+    drupal_add_css($site_url . 'sites/all/modules/unical_styles/style.css', 'external');
   }
 
 }
@@ -181,7 +181,7 @@ function unical_client_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => t('Use Custom CSS'),
     '#default_value' => variable_get('unical_client_settings_use_custom', ''),
-    '#description' => t('Use a custom UniCal calendar style, served from SITE ID/sites/all/modules/unical_styles/styles.css'),
+    '#description' => t('Use a custom UniCal calendar style, served from SITE ID/sites/all/modules/unical_styles/style.css'),
   );
 
   return system_settings_form($form);
