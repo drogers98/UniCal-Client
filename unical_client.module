@@ -126,7 +126,7 @@ function unical_client_form($form, &$form_state) {
   // General settings.
   $form['unical_client_settings'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Settings',
+    '#title' => 'Settings'
   );
 
   // URL of the API.
@@ -137,7 +137,7 @@ function unical_client_form($form, &$form_state) {
     '#size' => 100,
     '#maxlength' => 255,
     '#description' => t('URL of main UniCal calendar website'),
-    '#required' => TRUE,
+    '#required' => TRUE
   );
 
   // Site ID.
@@ -148,7 +148,7 @@ function unical_client_form($form, &$form_state) {
     '#size' => 5,
     '#maxlength' => 10,
     '#description' => t('ID of the site node'),
-    '#required' => TRUE,
+    '#required' => TRUE
   );
 
   // addevent.com ID
@@ -158,8 +158,7 @@ function unical_client_form($form, &$form_state) {
     '#default_value' => variable_get('unical_client_settings_addevent_id', ''),
     '#size' => 50,
     '#maxlength' => 100,
-    '#description' => t('ID for paid addevent.com plans'),
-    '#required' => TRUE,
+    '#description' => t('ID for paid addevent.com plans')
   );
 
   // Style settings.
@@ -169,7 +168,7 @@ function unical_client_form($form, &$form_state) {
   );
 
   // Add checkbox for using stock UniCal styles
-  $form['unical_client_styles_settings']['unical_client_settings_use_stock'] = array(
+  $form['unical_client_style_settings']['unical_client_settings_use_stock'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use Stock CSS'),
     '#default_value' => variable_get('unical_client_settings_use_stock', 1),
@@ -177,7 +176,7 @@ function unical_client_form($form, &$form_state) {
   );
 
   // Add checkbox for using custom UniCal styles
-  $form['unical_client_styles_settings']['unical_client_settings_use_custom'] = array(
+  $form['unical_client_style_settings']['unical_client_settings_use_custom'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use Custom CSS'),
     '#default_value' => variable_get('unical_client_settings_use_custom', ''),
