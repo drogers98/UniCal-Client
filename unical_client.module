@@ -172,7 +172,7 @@ function unical_client_form($form, &$form_state) {
   $form['unical_client_styles_settings']['unical_client_settings_use_stock'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use Stock CSS'),
-    '#default_value' => variable_get('unical_client_settings_use_stock', ''),
+    '#default_value' => variable_get('unical_client_settings_use_stock', 1),
     '#description' => t('Use the stock UniCal calendar style. Leave this checked unless you know what you are doing.'),
   );
 
