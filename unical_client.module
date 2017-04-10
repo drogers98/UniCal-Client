@@ -62,23 +62,34 @@ function unical_client_init() {
   );
   drupal_add_js(array('unical_client_variables' => $settings), 'setting');
 
-  // Unical API JS.
-  drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', array('type' => 'file', 'weight' => -20, 'scope' => 'footer'));
-
   // Fonts.
   drupal_add_css('https://fonts.googleapis.com/css?family=Open+Sans:400,700', 'external');
   drupal_add_css('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css', 'external');
 
+  // Unical server assets.
+  // If the site url is '/', the server is in the local Drupal docroot.
+  if ($site_url === '/') {
+    // Empty out the $site_url string so that the file paths are relative to
+    // the Drupal docroot and not the system root.
+    $site_url = '';
+    $type = 'file';
+  }
+  else {
+    $type = 'external';
+  }
+
+  // Unical API JS.
+  drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', array('type' => $type, 'weight' => -20, 'scope' => 'footer'));
+
   // CSS.
   // Add stock UniCal Styles if boolean is checked.
   if(variable_get('unical_client_settings_use_stock')) {
-    drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', 'external');
+    drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', $type);
   }
   // Add custom UniCal Styles if boolean is checked.
   if(variable_get('unical_client_settings_use_custom')) {
-    drupal_add_css($site_url . 'sites/all/modules/unical_styles/style.css', 'external');
+    drupal_add_css($site_url . 'sites/all/modules/unical_styles/style.css', $type);
   }
-
 }
 
 /**
