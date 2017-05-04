@@ -79,16 +79,16 @@ function unical_client_init() {
   }
 
   // Unical API JS.
-  drupal_add_js($site_url . 'sites/all/modules/unical/app/build/unical.js', array('type' => $type, 'weight' => -20, 'scope' => 'footer'));
+  drupal_add_js($site_url . drupal_get_path('module', 'unical') .'/app/build/unical.js', array('type' => $type, 'weight' => -20, 'scope' => 'footer'));
 
   // CSS.
   // Add stock UniCal Styles if boolean is checked.
   if(variable_get('unical_client_settings_use_stock')) {
-    drupal_add_css($site_url . 'sites/all/modules/unical/assets/css/styles.css', $type);
+    drupal_add_css($site_url . drupal_get_path('module', 'unical') .'/assets/css/styles.css', $type);
   }
   // Add custom UniCal Styles if boolean is checked.
   if(variable_get('unical_client_settings_use_custom')) {
-    drupal_add_css($site_url . 'sites/all/modules/unical_styles/style.css', $type);
+    drupal_add_css($site_url . drupal_get_path('module', 'unical_styles') .'/style.css', $type);
   }
 }
 
