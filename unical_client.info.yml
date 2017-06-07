@@ -1,0 +1,7 @@
+name: Unical Client
+type: module
+description: 'Allows calendars/events (sites) to be embedded from UniCal MASTER, via REST'
+package: UniCal
+core: '8.x'
+dependencies:
+  - drupal:node

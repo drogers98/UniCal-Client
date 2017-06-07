@@ -19,29 +19,31 @@ INSTALLATION
 ------------
 
 * Install as you would normally install a contributed Drupal module. See:
-  https://drupal.org/documentation/install/modules-themes/modules-7
+  https://www.drupal.org/docs/8/extending-drupal-8/installing-modules
   for further information.
 * Modify .htaccess file, as shown in configuration.
 
 CONFIGURATION
 -------------
 
-* Configure user permissions in
+* Configure user permissions in (/admin/config/unical_client/config)
   Administration » Configuration » Web services » UniCal Client settings:
   - Site ID: this is the NID of the particular site created on the MASTER
     install, viewable to admins on the node page of that site.
   - Site URL: This is the URL of the MASTER install, so we know where to point
     the REST endpoint. Also available on the node page of the Site.
-  - addevent.com ID: This is a field to enter an addevent.com paid plan key.
   - Use Stock CSS: This boolean controls whether you wish to use the stock unical
     css on the MASTER install (Site ID/sites/all/modules/unical/assets/css/styles.css).
     Best to leave this checked unless there is a specific reason not too.
   - Use Custom CSS: This boolean controls whether you wish to reference a custom
     stylesheet from the unical_styles module on the MASTER install.
+  - Module Path: This is set by default to sites/all/modules. If your MASTER install has
+    a different path for module installs, modify this here.
+  - addevent.com ID: This is a field to enter an addevent.com paid plan key.
 
 ### .htaccess modifications: ###
 
-Some modifications are neccesary to both re-route social bots the actual node
+Some modifications are necessary to both re-route social bots the actual node
 page (php) of the main site, in order to scrape, and to allow use of non # urls.
 The following rules assume that your events are in the format /event/NID/TITLE.
 

@@ -1,0 +1,17 @@
+# Routes for the front end calendar, and backend config.
+
+unical_client.calendar:
+  path: 'calendar'
+  defaults:
+    _controller: '\Drupal\unical_client\Controller\UnicalClientController::content'
+    _title: 'Calendar'
+  requirements:
+    _permission: 'access content'
+
+unical_client.config:
+  path: '/admin/config/unical_client/config'
+  defaults:
+    _form: '\Drupal\unical_client\Utility\UnicalClientConfigForm'
+    _title: 'Configuration for UniCal Client'
+  requirements:
+    _permission: 'administer site configuration'

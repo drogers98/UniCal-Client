@@ -1,0 +1,6 @@
+# Add the config page to the menu, under services.
+
+unical_client.config:
+  title: 'UniCal Client'
+  parent: system.admin_config_services
+  route_name: 'unical_client.config'

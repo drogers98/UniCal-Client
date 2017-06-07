@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * Contains the divs needed to display the calendar.
+ */
+#}
+<base href="{{base}}">
+
+<div data-ng-app="calendar" class="unical-calendar">
+  <div data-ng-view></div>
+</div>
+
+{% if site_id and site_url %}
+  <script>
+    window.site_id = {{ site_id }};
+    window.site_url = '{{ site_url }}' + 'api';
+    window.addevent_id = '{{ addevent_id }}';
+  </script>
+{% else %}
+  <p>Please <a href="/admin/config/unical_client/config">configure the module</a>. If you have already made changes, please clear cache if you are still seeing this message.</p>
+{% endif %}

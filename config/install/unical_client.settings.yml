@@ -1,0 +1,5 @@
+unical_client:
+  use_stock_css: 1
+  use_custom_css: 0
+  addevent_id: '000000'
+  unical_modules_path: 'sites/all/modules'
