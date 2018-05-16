@@ -53,6 +53,8 @@ function unical_client_init() {
   $site_url = variable_get('unical_client_settings_site_url');
   $site_id = variable_get('unical_client_settings_site_id');
   $addthis_id = variable_get('unical_client_settings_addevent_id');
+  $unical_path = variable_get('unical_client_settings_unical_path');
+  
 
   // JS Variables.
   $settings = array(
@@ -79,7 +81,12 @@ function unical_client_init() {
   }
 
   // Unical API JS.
-  drupal_add_js($site_url . drupal_get_path('module', 'unical') .'/app/build/unical.js', array('type' => $type, 'weight' => -20, 'scope' => 'footer'));
+  // Add custom UniCal Js path if is set.
+  if( variable_get('unical_client_settings_unical_path') ){
+    drupal_add_js($unical_path);
+  }else{
+    drupal_add_js($site_url . drupal_get_path('module', 'unical') .'/app/build/unical.js', array('type' => $type, 'weight' => -20, 'scope' => 'footer'));
+  }
 
   // CSS.
   // Add stock UniCal Styles if boolean is checked.
@@ -171,6 +178,27 @@ function unical_client_form($form, &$form_state) {
     '#maxlength' => 100,
     '#description' => t('ID for paid addevent.com plans')
   );
+
+  // Unical Path.
+  $form['unical_client_settings']['unical_client_settings_unical_path'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Unical Path'),
+    '#default_value' => variable_get('unical_client_settings_unical_path', ''),
+    '#size' => 100,
+    '#maxlength' => 255,
+    '#description' => t('The path to the unical.js file'),
+    '#required' => FALSE
+  );
+
+  // // addevent.com ID
+  // $form['unical_client_settings']['unical_client_settings_addevent_id'] = array(
+  //   '#type' => 'textfield',
+  //   '#title' => t('addevent.com ID'),
+  //   '#default_value' => variable_get('unical_client_settings_addevent_id', ''),
+  //   '#size' => 50,
+  //   '#maxlength' => 100,
+  //   '#description' => t('ID for paid addevent.com plans')
+  // );
 
   // Style settings.
   $form['unical_client_style_settings'] = array(
