@@ -54,6 +54,7 @@ function unical_client_init() {
   $site_id = variable_get('unical_client_settings_site_id');
   $addthis_id = variable_get('unical_client_settings_addevent_id');
   $unical_path = variable_get('unical_client_settings_unical_path');
+  $unical_cron = variable_get('unical_client_settings_unical_cron');
   
 
   // JS Variables.
@@ -190,15 +191,13 @@ function unical_client_form($form, &$form_state) {
     '#required' => FALSE
   );
 
-  // // addevent.com ID
-  // $form['unical_client_settings']['unical_client_settings_addevent_id'] = array(
-  //   '#type' => 'textfield',
-  //   '#title' => t('addevent.com ID'),
-  //   '#default_value' => variable_get('unical_client_settings_addevent_id', ''),
-  //   '#size' => 50,
-  //   '#maxlength' => 100,
-  //   '#description' => t('ID for paid addevent.com plans')
-  // );
+  // Make cron run optional
+  $form['unical_client_settings']['unical_client_settings_unical_cron'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Unical Cron Job'),
+    '#default_value' => variable_get('unical_client_settings_unical_cron', 1),
+    '#description' => t('Use cron jobs to remove events that have passed.')
+  );
 
   // Style settings.
   $form['unical_client_style_settings'] = array(
